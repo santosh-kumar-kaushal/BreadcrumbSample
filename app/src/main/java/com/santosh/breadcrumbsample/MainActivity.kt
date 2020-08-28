@@ -17,17 +17,20 @@ class MainActivity : AppCompatActivity(), BreadcrumbItemClickListener {
 
     private lateinit var addButton: Button
 
+    private lateinit var removeButton: Button
+
     private lateinit var adapter: BreadcrumbListAdapter
 
     private var listData = mutableListOf<Breadcrumb>()
 
-    private var counter=4
+    private var counter = 4
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         breadcrumbView = findViewById(R.id.breadcrumb)
         addButton = findViewById(R.id.addButton)
+        removeButton = findViewById(R.id.removeButton)
         preparedBreadcrumbData()
         adapter = BreadcrumbListAdapter(listData, this)
         breadcrumbView.adapter = adapter
@@ -36,6 +39,10 @@ class MainActivity : AppCompatActivity(), BreadcrumbItemClickListener {
             adapter.notifyDataSetChanged()
             breadcrumbView.scrollToPosition(listData.size - 1)
             counter++
+        }
+        removeButton.setOnClickListener {
+            removeItem()
+            adapter.notifyDataSetChanged()
         }
     }
 
@@ -54,14 +61,24 @@ class MainActivity : AppCompatActivity(), BreadcrumbItemClickListener {
         return listData
     }
 
+    private fun removeItem() {
+        if (listData.size > 1) {
+            listData.removeAt(listData.size - 1)
+        }
+    }
+
     private fun preparedBreadcrumbData(): MutableList<Breadcrumb> {
-        listData.add(Breadcrumb(ItemType.HEAD,
-            "Item",
-            ContextCompat.getColor(this, R.color.black)
-        ))
+        listData.add(
+            Breadcrumb(
+                ItemType.HEAD,
+                "Item",
+                ContextCompat.getColor(this, R.color.black)
+            )
+        )
         for (i in 1..3) {
             listData.add(
-                Breadcrumb(ItemType.BODY,
+                Breadcrumb(
+                    ItemType.BODY,
                     "Item $i",
                     ContextCompat.getColor(this, R.color.black)
                 )
