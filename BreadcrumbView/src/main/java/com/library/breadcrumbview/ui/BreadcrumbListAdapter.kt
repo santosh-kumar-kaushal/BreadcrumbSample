@@ -44,9 +44,9 @@ class BreadcrumbListAdapter(
     override fun getItemViewType(position: Int): Int {
         val breadcrumb = items[position]
         return when (breadcrumb.breadCrumbType) {
-            ItemType.HEAD -> TYPE_HEAD
+            ItemType.BODY -> TYPE_BODY
             ItemType.TAIL -> TYPE_TAIL
-            else -> TYPE_BODY
+            else -> TYPE_HEAD
         }
     }
 
@@ -61,7 +61,7 @@ class BreadcrumbListAdapter(
         }
 
         override fun onBind(item: Breadcrumb) {
-            imageView?.setBackgroundResource(R.drawable.ic_baseline_home_24)
+            imageView?.setBackgroundResource(item.homeIcon)
             listener.onItemClick(item)
         }
     }
