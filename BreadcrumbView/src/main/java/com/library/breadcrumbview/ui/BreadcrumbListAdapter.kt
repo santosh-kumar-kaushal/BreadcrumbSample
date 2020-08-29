@@ -1,6 +1,7 @@
 package com.library.breadcrumbview.ui
 
 import android.content.Context
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -21,7 +22,6 @@ class BreadcrumbListAdapter(
     companion object {
         private const val TYPE_HEAD = 0
         private const val TYPE_BODY = 1
-        private const val TYPE_TAIL = 2
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Breadcrumb> {
@@ -34,9 +34,6 @@ class BreadcrumbListAdapter(
             TYPE_BODY -> {
                 BreadcrumbBodyViewHolder(inflater, parent)
             }
-            TYPE_TAIL -> {
-                BreadcrumbTailViewHolder(inflater, parent)
-            }
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
@@ -45,7 +42,6 @@ class BreadcrumbListAdapter(
         val breadcrumb = items[position]
         return when (breadcrumb.breadCrumbType) {
             ItemType.BODY -> TYPE_BODY
-            ItemType.TAIL -> TYPE_TAIL
             else -> TYPE_HEAD
         }
     }
@@ -54,52 +50,42 @@ class BreadcrumbListAdapter(
 
     inner class BreadcrumbHeadViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         BaseViewHolder<Breadcrumb>(inflater.inflate(R.layout.head_breadcrumb_item, parent, false)) {
-        private var imageView: ImageView? = null
-
-        init {
-            imageView = itemView.findViewById(R.id.headImage)
-        }
+        private var imageView: ImageView = itemView.findViewById(R.id.headImage)
+        private var constraintLayout: ConstraintLayout = itemView.findViewById(R.id.root)
 
         override fun onBind(item: Breadcrumb) {
-            imageView?.setBackgroundResource(item.homeIcon)
-            listener.onItemClick(item)
+            imageView.setBackgroundResource(item.homeDrawable)
+            constraintLayout.setOnClickListener {
+                listener.onItemClick(item)
+            }
+
         }
     }
 
     inner class BreadcrumbBodyViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         BaseViewHolder<Breadcrumb>(inflater.inflate(R.layout.body_breadcrumb_item, parent, false)) {
-        private var titleView: TextView? = null
-        private var rootLayout:ConstraintLayout?=null
-
-        init {
-            titleView = itemView.findViewById(R.id.titleView)
-            rootLayout=itemView.findViewById(R.id.root)
-        }
+        private var titleView: TextView = itemView.findViewById(R.id.titleView)
+        private var constraintLayout: ConstraintLayout = itemView.findViewById(R.id.root)
+        private var separatorView: ImageView = itemView.findViewById(R.id.separator)
 
         override fun onBind(item: Breadcrumb) {
-            changeBackground(titleView,rootLayout, item)
+            with(titleView)
+            {
+                text = item.ItemTitle
+                setTextColor(item.textColor)
+                textSize = item.textSize.toFloat()
+                when (item.textStyle) {
+                    TextStyle.BOLD_ITALIC -> setTypeface(typeface, Typeface.BOLD_ITALIC)
+                    TextStyle.BOLD -> setTypeface(typeface, Typeface.BOLD)
+                    TextStyle.ITALIC -> setTypeface(typeface, Typeface.ITALIC)
+                    TextStyle.NORMAL -> setTypeface(typeface, Typeface.NORMAL)
+                }
+
+            }
+            separatorView.setBackgroundResource(item.separatorDrawable)
+            constraintLayout.setOnClickListener {
+                listener.onItemClick(item)
+            }
         }
     }
-
-    inner class BreadcrumbTailViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        BaseViewHolder<Breadcrumb>(inflater.inflate(R.layout.tail_breadcrumb_item, parent, false)) {
-        private var titleView: TextView? = null
-        private var rootLayout:ConstraintLayout?=null
-
-        init {
-            titleView = itemView.findViewById(R.id.titleView)
-            rootLayout=itemView.findViewById(R.id.root)
-        }
-
-        override fun onBind(item: Breadcrumb) {
-            changeBackground(titleView, rootLayout,item)
-        }
-    }
-
-    private fun changeBackground(textView: TextView?,constraintLayout: ConstraintLayout?, item: Breadcrumb) {
-        textView?.text = item.title
-        constraintLayout?.setBackgroundResource(item.backGroundImage)
-        listener.onItemClick(item)
-    }
-
 }

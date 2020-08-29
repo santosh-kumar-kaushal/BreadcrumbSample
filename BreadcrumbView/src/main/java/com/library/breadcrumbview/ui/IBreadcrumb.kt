@@ -2,10 +2,12 @@ package com.library.breadcrumbview.ui
 
 interface IBreadcrumb {
 
-    fun addHomeIcon(homeIcon:Int)
+    fun addHomeDrawable(drawable:Int)
 
     fun addItem(breadcrumb: Breadcrumb)
 
-    fun removeCurrentItem()
+    fun removeItem()
+
+    fun setItemOnClickListener(listener: BreadcrumbItemClickListener?)
 
 }

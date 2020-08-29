@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="3dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="5dp"
+    android:id="@+id/root"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <ImageView
         android:id="@+id/headImage"

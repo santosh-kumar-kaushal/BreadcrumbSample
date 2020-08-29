@@ -8,15 +8,15 @@
         android:id="@+id/breadcrumbView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:background="?attr/scrimBackground"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addButton"
-        android:text="@string/add"
+        android:id="@+id/addBodyButton"
+        android:text="@string/add_body"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,7 @@
         android:id="@+id/removeButton"
         android:text="@string/remove"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/addButton"
+        app:layout_constraintTop_toBottomOf="@+id/addBodyButton"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

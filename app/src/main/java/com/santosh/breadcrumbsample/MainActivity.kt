@@ -2,13 +2,14 @@ package com.santosh.breadcrumbsample
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.library.breadcrumbview.ui.Breadcrumb
+import com.library.breadcrumbview.ui.BreadcrumbItemClickListener
 import com.library.breadcrumbview.ui.BreadcrumbView
 import com.library.breadcrumbview.ui.ItemType
 
-class MainActivity :AppCompatActivity()
+class MainActivity :AppCompatActivity(), BreadcrumbItemClickListener
 {
     private lateinit var breadcrumbView: BreadcrumbView
 
@@ -16,24 +17,39 @@ class MainActivity :AppCompatActivity()
 
     private lateinit var removeButton: Button
 
+    private var counter: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         breadcrumbView=findViewById(R.id.breadcrumbView)
-        addButton = findViewById(R.id.addButton)
+        addButton = findViewById(R.id.addBodyButton)
         removeButton = findViewById(R.id.removeButton)
-        breadcrumbView.addHomeIcon(R.drawable.ic_baseline_home_24)
-        addButton.setOnClickListener {
-            val breadcrumb=Breadcrumb(
-                ItemType.BODY,
-                "Item",
-                ContextCompat.getColor(this, R.color.black)
-            )
-            breadcrumbView.addItem(breadcrumb)
+        breadcrumbView.setItemOnClickListener(this)
 
+        //breadcrumb related operation.
+        breadcrumbView.addHomeDrawable(R.drawable.breadcrumb_home_icon)
+
+        addButton.setOnClickListener {
+            val breadcrumb=BreadcrumbData(
+                ItemType.BODY,
+                "Item $counter"
+            )
+            //Add item to breadcrumb
+            breadcrumbView.addItem(breadcrumb)
+            counter++
         }
+
         removeButton.setOnClickListener {
-            breadcrumbView.removeCurrentItem()
+            //Removes item from breadcrumb
+            breadcrumbView.removeItem()
+            if(counter!=0) {
+                counter--
+            }
         }
+    }
+
+    override fun onItemClick(item: Breadcrumb) {
+            Toast.makeText(this,"clicked -> ${item.ItemTitle}",Toast.LENGTH_LONG).show()
     }
 }

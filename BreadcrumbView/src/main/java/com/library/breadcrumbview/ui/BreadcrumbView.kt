@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.library.breadcrumbview.R
 
@@ -19,6 +18,8 @@ class BreadcrumbView @JvmOverloads constructor(
 
     private var adapter: BreadcrumbListAdapter
 
+    private  var listener:BreadcrumbItemClickListener?=null
+
     init {
         LayoutInflater.from(context)
             .inflate(R.layout.view_custom_component, this, true)
@@ -27,22 +28,22 @@ class BreadcrumbView @JvmOverloads constructor(
         breadcrumbView.adapter = adapter
     }
 
-    override fun addHomeIcon(homeIcon:Int)
+    override fun addHomeDrawable(drawable:Int)
     {
         val breadcrumb=Breadcrumb(
             ItemType.HEAD,
-            "Item",
-            ContextCompat.getColor(context, R.color.black))
-        breadcrumb.homeIcon=homeIcon
+            "Home")
+        breadcrumb.homeDrawable=drawable
         listData.add(breadcrumb)
     }
 
     override fun addItem(breadcrumb: Breadcrumb) {
         listData.add(breadcrumb)
+        breadcrumbView.scrollToPosition(listData.size - 1)
         adapter.notifyDataSetChanged()
     }
 
-    override fun removeCurrentItem() {
+    override fun removeItem() {
         with(listData)
         {
             if (this.size > 1) {
@@ -52,8 +53,12 @@ class BreadcrumbView @JvmOverloads constructor(
         }
     }
 
-    override fun onItemClick(item: Breadcrumb) {
+    override fun setItemOnClickListener(listener: BreadcrumbItemClickListener?) {
+        this.listener=listener
+    }
 
+    override fun onItemClick(item: Breadcrumb) {
+         listener?.onItemClick(item)
     }
 
 

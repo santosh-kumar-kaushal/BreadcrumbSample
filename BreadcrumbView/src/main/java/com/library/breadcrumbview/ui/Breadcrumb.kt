@@ -2,13 +2,13 @@ package com.library.breadcrumbview.ui
 
 import com.library.breadcrumbview.R
 
-data class Breadcrumb(
-    var breadCrumbType: ItemType=ItemType.BODY,
-    var title: String,
-    var textColor: Int,
-    var backGroundImage: Int= R.color.white
-)
-{
-    var homeIcon:Int = R.drawable.ic_baseline_home_24
-
+open class Breadcrumb(
+     var breadCrumbType: ItemType = ItemType.BODY,
+     var ItemTitle: String
+) {
+    var homeDrawable: Int = R.drawable.breadcrumb_home_icon
+    open var textColor: Int = R.color.bread_crumb_color
+    open var textSize: Int = R.dimen.text_size
+    open var textStyle: TextStyle = TextStyle.BOLD_ITALIC
+    open var separatorDrawable: Int = R.drawable.breadcrumb_body_separator
 }
