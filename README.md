@@ -18,7 +18,7 @@
 - Change text style
 
 
-# Using BreadcrumbView Library in your Android application
+## Using BreadcrumbView Library in your Android application
 
 #### Add this in your build.gradle - Project level
 
