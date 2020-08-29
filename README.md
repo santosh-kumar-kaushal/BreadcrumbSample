@@ -70,9 +70,9 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 #### Want to change the text color, text size, separator drawable.
 
-```
-Create your own model and extend Breadcrumb and override felids you want to customize.
+###### Create your own model and extend Breadcrumb and override felids you want to customize.
 
+```
 data class BreadcrumbData(var breadCrumb: ItemType = ItemType.BODY,
                           var title: String):Breadcrumb(breadCrumb,title)
 {
