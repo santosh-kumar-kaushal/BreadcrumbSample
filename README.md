@@ -5,8 +5,7 @@
 
 # Screenshots
 
-<img width="297" alt="Screenshot 2020-08-29 at 2 41 00 PM" src="https://user-images.githubusercontent.com/43371182/91633964-52ec1e80-ea0a-11ea-9920-2fe5f4f83bf4.png">
-<img width="290" alt="Screenshot 2020-08-29 at 2 41 26 PM" src="https://user-images.githubusercontent.com/43371182/91633966-5384b500-ea0a-11ea-8bfc-7f94d0969616.png">
+![Screen Recording 2020-08-29 at 3 22 30 PM](https://user-images.githubusercontent.com/43371182/91634170-f25de100-ea0b-11ea-821d-d749de58079e.gif)
 
 # Overview of BreadcrumbView library
 
