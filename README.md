@@ -1,7 +1,9 @@
+[![](https://jitpack.io/v/santosh-kumar-kaushal/BreadcrumbSample.svg)](https://jitpack.io/#santosh-kumar-kaushal/BreadcrumbSample)
+
 # BreadcrumbSample
 
-- Breadcrumbview for navigation.
-- Ready to use library.
+- Breadcrumbview for activity/fragment navigation and tracking.
+- Easy to use library.
 
 # Screenshots
 
