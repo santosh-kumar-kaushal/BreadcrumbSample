@@ -3,6 +3,7 @@ package com.library.breadcrumbview.ui
 import android.content.Context
 import android.graphics.Typeface
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.library.breadcrumbview.R
 import com.library.breadcrumbview.base.BaseRecyclerViewAdapter
 import com.library.breadcrumbview.base.BaseViewHolder
+import com.library.breadcrumbview.util.ItemAnimation
 
 
 class BreadcrumbListAdapter(
@@ -23,6 +25,8 @@ class BreadcrumbListAdapter(
     companion object {
         private const val TYPE_HEAD = 0
         private const val TYPE_BODY = 1
+        private var lastPosition = -1
+        private var isAttached = false
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Breadcrumb> {
@@ -59,7 +63,8 @@ class BreadcrumbListAdapter(
             constraintLayout.setOnClickListener {
                 listener.onItemClick(item)
             }
-
+            if(item.needAnimation)
+            setAnimation(itemView, adapterPosition)
         }
     }
 
@@ -87,6 +92,20 @@ class BreadcrumbListAdapter(
             constraintLayout.setOnClickListener {
                 listener.onItemClick(item)
             }
+            if(item.needAnimation)
+            setAnimation(itemView, adapterPosition)
+        }
+    }
+
+    override fun onViewAttachedToWindow(holder: BaseViewHolder<Breadcrumb>) {
+        super.onViewAttachedToWindow(holder)
+         isAttached=true
+    }
+
+    private fun setAnimation(view: View, position: Int) {
+        if (position > lastPosition) {
+            ItemAnimation.animateItem(view, if (isAttached) position else -1)
+            lastPosition = position
         }
     }
 }
