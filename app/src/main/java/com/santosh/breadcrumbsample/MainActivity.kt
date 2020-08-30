@@ -28,12 +28,12 @@ class MainActivity :AppCompatActivity(), BreadcrumbItemClickListener
         breadcrumbView.setItemOnClickListener(this)
 
         //breadcrumb related operation.
-        breadcrumbView.addHomeDrawable(R.drawable.breadcrumb_home_icon)
+        breadcrumbView.addHomeDrawable(R.drawable.breadcrumb_default_home_icon)
 
         addButton.setOnClickListener {
             val breadcrumb=BreadcrumbData(
                 ItemType.BODY,
-                "Item $counter"
+                "Fragment $counter"
             )
             //Add item to breadcrumb
             breadcrumbView.addItem(breadcrumb)

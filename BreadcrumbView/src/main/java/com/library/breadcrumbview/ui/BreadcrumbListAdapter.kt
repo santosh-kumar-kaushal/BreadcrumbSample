@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import com.library.breadcrumbview.R
 import com.library.breadcrumbview.base.BaseRecyclerViewAdapter
 import com.library.breadcrumbview.base.BaseViewHolder
@@ -72,7 +73,7 @@ class BreadcrumbListAdapter(
             with(titleView)
             {
                 text = item.ItemTitle
-                setTextColor(item.textColor)
+                setTextColor(ContextCompat.getColor(context, item.textColor))
                 textSize = item.textSize.toFloat()
                 when (item.textStyle) {
                     TextStyle.BOLD_ITALIC -> setTypeface(typeface, Typeface.BOLD_ITALIC)
