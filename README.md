@@ -34,7 +34,7 @@
 #### Add this in your build.gradle - App level
 
 ``` 
-implementation 'com.github.santosh-kumar-kaushal:BreadcrumbSample:1.0'
+implementation 'com.github.santosh-kumar-kaushal:BreadcrumbSample:1.1'
 
 ```
 
