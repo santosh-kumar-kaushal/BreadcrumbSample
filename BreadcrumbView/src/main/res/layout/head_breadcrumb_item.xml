@@ -9,10 +9,12 @@
 
     <ImageView
         android:id="@+id/headImage"
+        android:layout_marginStart="3dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@null" />
+        android:contentDescription="@null"
+        android:layout_marginLeft="3dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

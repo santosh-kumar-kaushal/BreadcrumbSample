@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/separator"
-        android:background="@drawable/breadcrumb_body_separator"
+        android:background="@drawable/breadcrumb_default_body_separator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
