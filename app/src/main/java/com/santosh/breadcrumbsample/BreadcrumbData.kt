@@ -15,7 +15,7 @@ data class BreadcrumbData(var breadCrumb: ItemType = ItemType.BODY,
 
     override var textStyle: TextStyle = TextStyle.ITALIC
 
-    override var needAnimation: Boolean= false
+    override var needAnimation: Boolean= true
 
 }
 
